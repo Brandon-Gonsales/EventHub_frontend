@@ -10,7 +10,7 @@ interface HomePageProps {
 
 const EventCard: React.FC<{ event: EventData; onSelect: () => void }> = ({ event, onSelect }) => (
   <div 
-    className="bg-slate-800 rounded-xl overflow-hidden shadow-lg hover:shadow-indigo-500/30 transition-all duration-300 transform hover:-translate-y-2 flex flex-col cursor-pointer group"
+    className="bg-slate-800 rounded-xl overflow-hidden shadow-lg hover:shadow-sky-500/30 transition-all duration-300 transform hover:-translate-y-2 flex flex-col cursor-pointer group"
     onClick={onSelect}
   >
     <div className="relative overflow-hidden">
@@ -48,12 +48,12 @@ const HeroSection: React.FC<{ event: EventData; onSelect: () => void }> = ({ eve
       <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter drop-shadow-lg">
         {event.title}
       </h1>
-      <p className="mt-2 text-lg md:text-xl font-light text-indigo-300 drop-shadow-md max-w-2xl">
+      <p className="mt-2 text-lg md:text-xl font-light text-sky-300 drop-shadow-md max-w-2xl">
         {event.subtitle}
       </p>
       <button 
         onClick={onSelect}
-        className="mt-8 bg-indigo-600 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-indigo-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
+        className="mt-8 bg-sky-600 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-sky-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
       >
         Ver Evento
       </button>
@@ -78,7 +78,7 @@ const HomePage: React.FC<HomePageProps> = ({ events, onSelectEvent }) => {
       
       {otherEvents.length > 0 && (
         <section>
-          <h2 className="text-3xl font-bold text-white mb-8 border-l-4 border-indigo-500 pl-4">
+          <h2 className="text-3xl font-bold text-white mb-8 border-l-4 border-sky-500 pl-4">
             Más Eventos
           </h2>
           <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

@@ -36,6 +36,7 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
     phone: '',
     institution: '',
     career: '',
+    vendorCode: '',
   });
 
   const [selectedServices, setSelectedServices] = useState<Record<string, boolean>>(
@@ -96,9 +97,7 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // La URL debe apuntar a tu servidor backend.
-    // Cuando se ejecuta localmente, sería por ejemplo 'http://localhost:4000/api/submit'
-    const apiUrl = `https://eventhub-backend-jhht.onrender.com/api/submit`;
+    const apiUrl = 'https://eventhub-backend-jhht.onrender.com/api/submit';
 
     const payload = new FormData();
     payload.append('name', formData.name);
@@ -109,6 +108,7 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
     payload.append('department', formData.department);
     payload.append('institution', formData.institution);
     payload.append('career', formData.career);
+    payload.append('vendorCode', formData.vendorCode);
     
     const selectedServiceNames = eventData.services
         ?.filter(service => selectedServices[service.id])
@@ -162,7 +162,7 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
   const getButtonClass = (method: PaymentMethod) => {
     const baseClasses = "flex-1 p-4 rounded-lg text-left transition-all duration-300 flex items-center space-x-3 text-lg font-semibold disabled:opacity-50";
     return selectedMethod === method
-      ? `${baseClasses} bg-indigo-600 text-white shadow-lg scale-105`
+      ? `${baseClasses} bg-sky-600 text-white shadow-lg scale-105`
       : `${baseClasses} bg-slate-700 text-slate-300 hover:bg-slate-600`;
   };
   
@@ -180,7 +180,7 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
 
   return (
     <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl shadow-2xl p-6 md:p-10 border border-slate-700">
-      <h3 className="text-2xl font-bold text-white border-b-2 border-indigo-500 pb-2 mb-6">
+      <h3 className="text-2xl font-bold text-white border-b-2 border-sky-500 pb-2 mb-6">
         Adquiere tu Entrada
       </h3>
       
@@ -228,27 +228,27 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-1">Nombre</label>
-              <input type="text" id="name" name="name" value={formData.name} onChange={handleInputChange} placeholder="Ej. Juan" required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"/>
+              <input type="text" id="name" name="name" value={formData.name} onChange={handleInputChange} placeholder="Ej. Juan" required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"/>
             </div>
             <div>
               <label htmlFor="lastName" className="block text-sm font-medium text-slate-300 mb-1">Apellidos</label>
-              <input type="text" id="lastName" name="lastName" value={formData.lastName} onChange={handleInputChange} placeholder="Ej. Pérez" required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"/>
+              <input type="text" id="lastName" name="lastName" value={formData.lastName} onChange={handleInputChange} placeholder="Ej. Pérez" required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"/>
             </div>
           </div>
 
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-1">Correo Electrónico</label>
-            <input type="email" id="email" name="email" value={formData.email} onChange={handleInputChange} placeholder="tu@correo.com" required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"/>
+            <input type="email" id="email" name="email" value={formData.email} onChange={handleInputChange} placeholder="tu@correo.com" required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"/>
           </div>
 
           <div>
             <label htmlFor="phone" className="block text-sm font-medium text-slate-300 mb-1">Teléfono/Celular</label>
-            <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="Ej. 70012345" required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"/>
+            <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="Ej. 70012345" required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"/>
           </div>
 
           <div>
             <label htmlFor="academicDegree" className="block text-sm font-medium text-slate-300 mb-1">Grado Académico</label>
-            <select id="academicDegree" name="academicDegree" value={formData.academicDegree} onChange={handleInputChange} className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+            <select id="academicDegree" name="academicDegree" value={formData.academicDegree} onChange={handleInputChange} className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition">
               <option value="estudiante">Estudiante</option>
               <option value="profesional">Profesional</option>
             </select>
@@ -256,14 +256,14 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
 
           <div>
             <label htmlFor="department" className="block text-sm font-medium text-slate-300 mb-1">Departamento</label>
-            <select id="department" name="department" value={formData.department} onChange={handleInputChange} className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+            <select id="department" name="department" value={formData.department} onChange={handleInputChange} className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition">
               {DEPARTMENTS.map(dep => (<option key={dep.value} value={dep.value}>{dep.label}</option>))}
             </select>
           </div>
 
           <div>
             <label htmlFor="institution" className="block text-sm font-medium text-slate-300 mb-1">Institución Universitaria</label>
-            <select id="institution" name="institution" value={formData.institution} onChange={handleInputChange} required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+            <select id="institution" name="institution" value={formData.institution} onChange={handleInputChange} required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition">
               <option value="" disabled>Selecciona tu universidad</option>
               {availableUniversities.map(uni => (<option key={uni.id} value={uni.name}>{uni.name}</option>))}
             </select>
@@ -271,16 +271,21 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
 
           <div>
             <label htmlFor="career" className="block text-sm font-medium text-slate-300 mb-1">Carrera</label>
-            <input type="text" id="career" name="career" value={formData.career} onChange={handleInputChange} placeholder="Ej. Ingeniería de Sistemas" required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"/>
+            <input type="text" id="career" name="career" value={formData.career} onChange={handleInputChange} placeholder="Ej. Ingeniería de Sistemas" required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"/>
+          </div>
+
+          <div>
+            <label htmlFor="vendorCode" className="block text-sm font-medium text-slate-300 mb-1">Código de Vendedor (Opcional)</label>
+            <input type="text" id="vendorCode" name="vendorCode" value={formData.vendorCode} onChange={handleInputChange} placeholder="Ej. DATAHUB01" className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"/>
           </div>
           
           <div>
             <label className="block text-sm font-medium text-slate-300 mb-2">Selecciona tus Servicios</label>
             <div className="space-y-3">
               {eventData.services?.map(service => (
-                <label key={service.id} htmlFor={service.id} className={`flex items-center justify-between p-3 bg-slate-900 rounded-md border border-slate-700 transition ${service.type !== 'mandatory' ? 'hover:border-indigo-500 cursor-pointer' : 'opacity-70'}`}>
+                <label key={service.id} htmlFor={service.id} className={`flex items-center justify-between p-3 bg-slate-900 rounded-md border border-slate-700 transition ${service.type !== 'mandatory' ? 'hover:border-sky-500 cursor-pointer' : 'opacity-70'}`}>
                   <div className="flex items-center">
-                    <input type="checkbox" id={service.id} name={service.id} checked={selectedServices[service.id] || false} onChange={() => handleServiceChange(service)} disabled={service.type === 'mandatory'} className="h-5 w-5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 disabled:opacity-50"/>
+                    <input type="checkbox" id={service.id} name={service.id} checked={selectedServices[service.id] || false} onChange={() => handleServiceChange(service)} disabled={service.type === 'mandatory'} className="h-5 w-5 rounded border-gray-300 text-sky-600 focus:ring-sky-500 disabled:opacity-50"/>
                     <span className={`ml-3 text-white ${service.type === 'mandatory' ? 'text-slate-400' : ''}`}>{service.name}</span>
                   </div>
                   <span className="font-semibold text-slate-300">Bs. {service.price}</span>
@@ -292,7 +297,7 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
           {selectedMethod === 'qr' && (
             <div>
               <label htmlFor="proof" className="block text-sm font-medium text-slate-300 mb-1">Comprobante de Pago</label>
-              <label htmlFor="proof" className="w-full bg-slate-900 border border-dashed border-slate-700 rounded-md p-3 text-slate-400 hover:bg-slate-800 hover:border-indigo-500 cursor-pointer flex items-center justify-center transition">
+              <label htmlFor="proof" className="w-full bg-slate-900 border border-dashed border-slate-700 rounded-md p-3 text-slate-400 hover:bg-slate-800 hover:border-sky-500 cursor-pointer flex items-center justify-center transition">
                 <UploadIcon className="w-6 h-6 mr-2" />
                 <span>{proofFile ? proofFile.name : 'Subir archivo...'}</span>
               </label>
@@ -300,7 +305,7 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
             </div>
           )}
           
-          <button type="submit" disabled={!isFormValid || isSubmitting} className="w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded-md hover:bg-indigo-700 disabled:bg-slate-600 disabled:cursor-not-allowed disabled:text-slate-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-indigo-500">
+          <button type="submit" disabled={!isFormValid || isSubmitting} className="w-full bg-sky-600 text-white font-bold py-3 px-4 rounded-md hover:bg-sky-700 disabled:bg-slate-600 disabled:cursor-not-allowed disabled:text-slate-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-sky-500">
             {isSubmitting ? 'Enviando...' : `Confirmar Asistencia - Bs. ${totalAmount}`}
           </button>
         </form>

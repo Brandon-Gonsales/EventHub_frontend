@@ -17,7 +17,7 @@ const EventHeader: React.FC<EventHeaderProps> = ({ title, subtitle, heroImage })
         <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter drop-shadow-lg">
           {title}
         </h1>
-        <p className="mt-2 text-xl md:text-2xl font-light text-indigo-300 drop-shadow-md">
+        <p className="mt-2 text-xl md:text-2xl font-light text-sky-300 drop-shadow-md">
           {subtitle}
         </p>
       </div>

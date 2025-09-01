@@ -7,7 +7,7 @@ export const allEvents: EventData[] = [
     subtitle: 'Santa Cruz Paraíso del Oriente',
     heroImage: 'https://unifranz.edu.bo/wp-content/uploads/2023/02/SANTA-CRUZ.jpg',
     category: 'Congreso',
-    categoryColor: 'bg-indigo-500',
+    categoryColor: 'bg-sky-500',
     date: '18-20 SEP, 2025',
     time: '20:00 HRS',
     location: 'Santa Cruz de la Sierra',

@@ -9,7 +9,7 @@ interface EventSplashPageProps {
 const EventSplashPage: React.FC<EventSplashPageProps> = ({ event, onProceed }) => {
   return (
     <div 
-      className="relative h-screen w-full bg-cover bg-center flex items-center justify-center text-white -mt-20" // Ajuste de margen para solapar con el espacio del header
+      className="relative min-h-[calc(100vh-5rem)] w-full bg-cover bg-center flex items-center justify-center text-white" 
       style={{ backgroundImage: `url(${event.heroImage})` }}
     >
       <div className="absolute inset-0 bg-black opacity-60"></div>
@@ -17,12 +17,12 @@ const EventSplashPage: React.FC<EventSplashPageProps> = ({ event, onProceed }) =
         <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter drop-shadow-lg">
           {event.title}
         </h1>
-        <p className="mt-2 text-xl md:text-2xl font-light text-indigo-300 drop-shadow-md">
+        <p className="mt-2 text-xl md:text-2xl font-light text-sky-300 drop-shadow-md">
           {event.subtitle}
         </p>
         <button 
           onClick={onProceed}
-          className="mt-12 bg-indigo-600 text-white font-bold py-4 px-10 rounded-lg text-xl hover:bg-indigo-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
+          className="mt-12 bg-sky-600 text-white font-bold py-4 px-10 rounded-lg text-xl hover:bg-sky-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
         >
           Adquirir Entradas
         </button>
