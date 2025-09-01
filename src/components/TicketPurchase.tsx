@@ -98,7 +98,7 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
 
     // La URL debe apuntar a tu servidor backend.
     // Cuando se ejecuta localmente, sería por ejemplo 'http://localhost:4000/api/submit'
-    const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/api/submit`;
+    const apiUrl = `https://eventhub-backend-jhht.onrender.com/api/submit`;
 
     const payload = new FormData();
     payload.append('name', formData.name);
