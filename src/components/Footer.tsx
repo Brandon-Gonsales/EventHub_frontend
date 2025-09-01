@@ -15,12 +15,12 @@ const Footer: React.FC = () => {
           </div>
           <div className="md:col-span-2 md:text-right">
             <h3 className="text-lg font-semibold text-white">Contacto</h3>
-            <p className="mt-2 text-sm">info@eventhub.com</p>
-            <p className="text-sm">+1 (234) 567-890</p>
+            <p className="mt-2 text-sm">DataHubAnalytics@hotmail.com</p>
+            <p className="text-sm">+591 75-360-623</p>
           </div>
         </div>
         <div className="mt-8 border-t border-slate-800 pt-8 text-center text-sm">
-          <p>&copy; {new Date().getFullYear()} EventHub. Todos los derechos reservados.</p>
+          <p>&copy; {new Date().getFullYear()} DataGroup. Todos los derechos reservados.</p>
         </div>
       </div>
     </footer>

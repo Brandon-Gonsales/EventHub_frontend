@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage';
 import EventSplashPage from './pages/EventSplashPage';
 import EventPurchasePage from './pages/EventPurchasePage';
 import Footer from './components/Footer';
+import Header from './components/Header';
 import { EventData } from './types';
 
 type View = 'home' | 'splash' | 'purchase';
@@ -44,10 +45,11 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white font-sans">
-      <div className="flex-grow">
+    <div className="min-h-screen bg-slate-900 text-white font-sans flex flex-col">
+      <Header />
+      <main className="flex-grow pt-20"> {/* pt-20 for h-20 header */}
         {renderView()}
-      </div>
+      </main>
       <Footer />
     </div>
   );
