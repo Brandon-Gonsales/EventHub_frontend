@@ -15,7 +15,8 @@ export interface EventData {
   id: string;
   title: string;
   subtitle: string;
-  heroImage: string;
+  //heroImage: string;
+  images: string[];
   date: string;
   time: string;
   location: string;
