@@ -3,7 +3,6 @@ import QrCodeIcon from './icons/QrCodeIcon';
 import CashIcon from './icons/CashIcon';
 import UploadIcon from './icons/UploadIcon';
 import CheckCircleIcon from './icons/CheckCircleIcon';
-import ArrowLeftIcon from './icons/ArrowLeftIcon';
 
 import {
   EventData,
@@ -14,13 +13,6 @@ import {
   PaymentMethod,
   EventService,
 } from '../types';
-
-// --- ADVERTENCIA DE SEGURIDAD ---
-// Las credenciales están aquí directamente porque tu entorno no tiene un paso de compilación
-// para leer archivos .env. Esto NO es seguro para producción, ya que expone tu token.
-const TELEGRAM_BOT_TOKEN = "8418581740:AAGRvp8eJ7Zjax_CKUiDI-5vWDxBwNRV_fg";
-const TELEGRAM_CHAT_ID = "1796672690";
-
 
 const initializeServices = (services: EventService[] = []): Record<string, boolean> => {
   return services.reduce((acc, service) => {
@@ -44,6 +36,7 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
     phone: '',
     institution: '',
     career: '',
+    vendorCode: '',
   });
 
   const [selectedServices, setSelectedServices] = useState<Record<string, boolean>>(
@@ -104,74 +97,49 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
-      console.error("Error: Las credenciales de Telegram no están configuradas.");
-      alert("Error de configuración: No se pudo conectar con el servicio de notificaciones.");
-      setIsSubmitting(false);
-      return;
-    }
+    const apiUrl = 'https://eventhub-backend-jhht.onrender.com/api/submit';
+
+    const payload = new FormData();
+    payload.append('name', formData.name);
+    payload.append('lastName', formData.lastName);
+    payload.append('email', formData.email);
+    payload.append('phone', formData.phone);
+    payload.append('academicDegree', formData.academicDegree);
+    payload.append('department', formData.department);
+    payload.append('institution', formData.institution);
+    payload.append('career', formData.career);
+    payload.append('vendorCode', formData.vendorCode);
     
-    // 1. Crear el objeto JSON plano con los datos del formulario
     const selectedServiceNames = eventData.services
         ?.filter(service => selectedServices[service.id])
         .map(service => service.name) || [];
 
-    const submissionData = {
-        name: formData.name,
-        lastName: formData.lastName,
-        email: formData.email,
-        phone: formData.phone,
-        academicDegree: formData.academicDegree,
-        department: formData.department,
-        institution: formData.institution,
-        career: formData.career,
-        selectedServices: selectedServiceNames,
-        totalAmount: totalAmount,
-        paymentMethod: selectedMethod,
-    };
+    payload.append('selectedServices', JSON.stringify(selectedServiceNames));
+    payload.append('totalAmount', totalAmount.toString());
+    payload.append('paymentMethod', selectedMethod);
 
-    const jsonDataString = JSON.stringify(submissionData, null, 2);
+    if (selectedMethod === 'qr' && proofFile) {
+      payload.append('proof', proofFile, proofFile.name);
+    }
 
     try {
-        let response;
-        // 2. Si hay un archivo (Pago QR), enviar como foto con el JSON en el pie de foto
-        if (selectedMethod === 'qr' && proofFile) {
-            const telegramApiUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendPhoto`;
-            const payload = new FormData();
-            payload.append('chat_id', TELEGRAM_CHAT_ID);
-            payload.append('photo', proofFile, proofFile.name);
-            payload.append('caption', jsonDataString);
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        body: payload, // FormData establece el encabezado Content-Type automáticamente
+      });
 
-            response = await fetch(telegramApiUrl, {
-                method: 'POST',
-                body: payload, // El navegador establece el Content-Type automáticamente
-            });
-        } else {
-            // 3. Si no hay archivo (Pago en Taquilla), enviar solo el texto JSON
-            const telegramApiUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
-            response = await fetch(telegramApiUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    chat_id: TELEGRAM_CHAT_ID,
-                    text: jsonDataString,
-                }),
-            });
-        }
-        
-        const data = await response.json();
-
-        if (data.ok) {
-            console.log("¡Datos enviados a Telegram con éxito!");
-            setIsSubmitted(true);
-        } else {
-            throw new Error(data.description);
-        }
-    } catch (error) {
-        console.error("Error al enviar los datos a Telegram:", error);
-        alert("Hubo un problema al enviar tu registro. Por favor, inténtalo de nuevo.");
+      if (response.ok) {
+        console.log("¡Datos enviados con éxito!");
+        setIsSubmitted(true);
+      } else {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Error del servidor');
+      }
+    } catch (error: any) {
+      console.error("Error al enviar el registro:", error);
+      alert(`Hubo un problema al enviar tu registro: ${error.message}`);
     } finally {
-        setIsSubmitting(false);
+      setIsSubmitting(false);
     }
   };
 
@@ -194,7 +162,7 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
   const getButtonClass = (method: PaymentMethod) => {
     const baseClasses = "flex-1 p-4 rounded-lg text-left transition-all duration-300 flex items-center space-x-3 text-lg font-semibold disabled:opacity-50";
     return selectedMethod === method
-      ? `${baseClasses} bg-indigo-600 text-white shadow-lg scale-105`
+      ? `${baseClasses} bg-sky-600 text-white shadow-lg scale-105`
       : `${baseClasses} bg-slate-700 text-slate-300 hover:bg-slate-600`;
   };
   
@@ -206,28 +174,13 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
         <p className="text-slate-300 text-lg max-w-md">
           Gracias, <span className="font-semibold text-white">{formData.name}</span>. Hemos recibido tu pre-registro. En breve recibirás un correo de confirmación con los detalles.
         </p>
-        <a
-          href="#"
-          className="mt-8 bg-indigo-600 text-white font-bold py-3 px-6 rounded-md hover:bg-indigo-700 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-indigo-500"
-        >
-          Volver al Inicio
-        </a>
       </div>
     );
   }
 
   return (
-    <div className="relative bg-slate-800/50 backdrop-blur-sm rounded-xl shadow-2xl p-6 md:p-10 border border-slate-700">
-       <a
-        href="#"
-        className="absolute top-6 left-6 text-slate-400 hover:text-white transition flex items-center text-sm z-20 group"
-        aria-label="Volver a los detalles del evento"
-      >
-        <ArrowLeftIcon className="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform" />
-        <span>Volver</span>
-      </a>
-      
-      <h3 className="text-center text-2xl font-bold text-white border-b-2 border-indigo-500 pb-2 mb-6">
+    <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl shadow-2xl p-6 md:p-10 border border-slate-700">
+      <h3 className="text-2xl font-bold text-white border-b-2 border-sky-500 pb-2 mb-6">
         Adquiere tu Entrada
       </h3>
       
@@ -275,27 +228,27 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-1">Nombre</label>
-              <input type="text" id="name" name="name" value={formData.name} onChange={handleInputChange} placeholder="Ej. Juan" required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"/>
+              <input type="text" id="name" name="name" value={formData.name} onChange={handleInputChange} placeholder="Ej. Juan" required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"/>
             </div>
             <div>
               <label htmlFor="lastName" className="block text-sm font-medium text-slate-300 mb-1">Apellidos</label>
-              <input type="text" id="lastName" name="lastName" value={formData.lastName} onChange={handleInputChange} placeholder="Ej. Pérez" required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"/>
+              <input type="text" id="lastName" name="lastName" value={formData.lastName} onChange={handleInputChange} placeholder="Ej. Pérez" required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"/>
             </div>
           </div>
 
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-1">Correo Electrónico</label>
-            <input type="email" id="email" name="email" value={formData.email} onChange={handleInputChange} placeholder="tu@correo.com" required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"/>
+            <input type="email" id="email" name="email" value={formData.email} onChange={handleInputChange} placeholder="tu@correo.com" required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"/>
           </div>
 
           <div>
             <label htmlFor="phone" className="block text-sm font-medium text-slate-300 mb-1">Teléfono/Celular</label>
-            <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="Ej. 70012345" required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"/>
+            <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="Ej. 70012345" required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"/>
           </div>
 
           <div>
             <label htmlFor="academicDegree" className="block text-sm font-medium text-slate-300 mb-1">Grado Académico</label>
-            <select id="academicDegree" name="academicDegree" value={formData.academicDegree} onChange={handleInputChange} className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+            <select id="academicDegree" name="academicDegree" value={formData.academicDegree} onChange={handleInputChange} className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition">
               <option value="estudiante">Estudiante</option>
               <option value="profesional">Profesional</option>
             </select>
@@ -303,14 +256,14 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
 
           <div>
             <label htmlFor="department" className="block text-sm font-medium text-slate-300 mb-1">Departamento</label>
-            <select id="department" name="department" value={formData.department} onChange={handleInputChange} className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+            <select id="department" name="department" value={formData.department} onChange={handleInputChange} className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition">
               {DEPARTMENTS.map(dep => (<option key={dep.value} value={dep.value}>{dep.label}</option>))}
             </select>
           </div>
 
           <div>
             <label htmlFor="institution" className="block text-sm font-medium text-slate-300 mb-1">Institución Universitaria</label>
-            <select id="institution" name="institution" value={formData.institution} onChange={handleInputChange} required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+            <select id="institution" name="institution" value={formData.institution} onChange={handleInputChange} required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition">
               <option value="" disabled>Selecciona tu universidad</option>
               {availableUniversities.map(uni => (<option key={uni.id} value={uni.name}>{uni.name}</option>))}
             </select>
@@ -318,16 +271,21 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
 
           <div>
             <label htmlFor="career" className="block text-sm font-medium text-slate-300 mb-1">Carrera</label>
-            <input type="text" id="career" name="career" value={formData.career} onChange={handleInputChange} placeholder="Ej. Ingeniería de Sistemas" required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"/>
+            <input type="text" id="career" name="career" value={formData.career} onChange={handleInputChange} placeholder="Ej. Ingeniería de Sistemas" required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"/>
+          </div>
+
+          <div>
+            <label htmlFor="vendorCode" className="block text-sm font-medium text-slate-300 mb-1">Código de Vendedor (Opcional)</label>
+            <input type="text" id="vendorCode" name="vendorCode" value={formData.vendorCode} onChange={handleInputChange} placeholder="Ej. DATAHUB01" className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"/>
           </div>
           
           <div>
             <label className="block text-sm font-medium text-slate-300 mb-2">Selecciona tus Servicios</label>
             <div className="space-y-3">
               {eventData.services?.map(service => (
-                <label key={service.id} htmlFor={service.id} className={`flex items-center justify-between p-3 bg-slate-900 rounded-md border border-slate-700 transition ${service.type !== 'mandatory' ? 'hover:border-indigo-500 cursor-pointer' : 'opacity-70'}`}>
+                <label key={service.id} htmlFor={service.id} className={`flex items-center justify-between p-3 bg-slate-900 rounded-md border border-slate-700 transition ${service.type !== 'mandatory' ? 'hover:border-sky-500 cursor-pointer' : 'opacity-70'}`}>
                   <div className="flex items-center">
-                    <input type="checkbox" id={service.id} name={service.id} checked={selectedServices[service.id] || false} onChange={() => handleServiceChange(service)} disabled={service.type === 'mandatory'} className="h-5 w-5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 disabled:opacity-50"/>
+                    <input type="checkbox" id={service.id} name={service.id} checked={selectedServices[service.id] || false} onChange={() => handleServiceChange(service)} disabled={service.type === 'mandatory'} className="h-5 w-5 rounded border-gray-300 text-sky-600 focus:ring-sky-500 disabled:opacity-50"/>
                     <span className={`ml-3 text-white ${service.type === 'mandatory' ? 'text-slate-400' : ''}`}>{service.name}</span>
                   </div>
                   <span className="font-semibold text-slate-300">Bs. {service.price}</span>
@@ -339,7 +297,7 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
           {selectedMethod === 'qr' && (
             <div>
               <label htmlFor="proof" className="block text-sm font-medium text-slate-300 mb-1">Comprobante de Pago</label>
-              <label htmlFor="proof" className="w-full bg-slate-900 border border-dashed border-slate-700 rounded-md p-3 text-slate-400 hover:bg-slate-800 hover:border-indigo-500 cursor-pointer flex items-center justify-center transition">
+              <label htmlFor="proof" className="w-full bg-slate-900 border border-dashed border-slate-700 rounded-md p-3 text-slate-400 hover:bg-slate-800 hover:border-sky-500 cursor-pointer flex items-center justify-center transition">
                 <UploadIcon className="w-6 h-6 mr-2" />
                 <span>{proofFile ? proofFile.name : 'Subir archivo...'}</span>
               </label>
@@ -347,7 +305,7 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
             </div>
           )}
           
-          <button type="submit" disabled={!isFormValid || isSubmitting} className="w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded-md hover:bg-indigo-700 disabled:bg-slate-600 disabled:cursor-not-allowed disabled:text-slate-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-indigo-500">
+          <button type="submit" disabled={!isFormValid || isSubmitting} className="w-full bg-sky-600 text-white font-bold py-3 px-4 rounded-md hover:bg-sky-700 disabled:bg-slate-600 disabled:cursor-not-allowed disabled:text-slate-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-sky-500">
             {isSubmitting ? 'Enviando...' : `Confirmar Asistencia - Bs. ${totalAmount}`}
           </button>
         </form>
