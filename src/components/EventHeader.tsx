@@ -17,7 +17,7 @@ interface EventHeaderProps {
   images: string[];
 }
 
-const EventHeader: React.FC<EventHeaderProps> = ({ title, subtitle, images }) => {
+const EventHeader: React.FC<EventHeaderProps> = ({ images }) => {
   return (
     <header 
       // La altura se mantiene en el contenedor principal
