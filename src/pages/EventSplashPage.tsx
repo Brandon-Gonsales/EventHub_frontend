@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, Link, Navigate } from 'react-router-dom'; // Se importan hooks y componentes de react-router-dom
+import { useParams, Link } from 'react-router-dom'; // Se importan hooks y componentes de react-router-dom
 import { EventData } from '../types';
 
 // Se actualizan las props: ahora recibe la lista de todos los eventos
