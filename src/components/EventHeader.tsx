@@ -49,7 +49,7 @@ const EventHeader: React.FC<EventHeaderProps> = ({ title, subtitle, images }) =>
       </Swiper>
       
       {/* 6. El contenido de texto se superpone al carrusel */}
-      <div className="absolute inset-0 bg-black opacity-60 z-10"></div>
+      {/*<div className="absolute inset-0 bg-black opacity-60 z-10"></div>
       <div className="absolute inset-0 flex items-center justify-center text-center p-4 z-20">
         <div>
           <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter drop-shadow-lg animate-fade-in">
@@ -59,7 +59,7 @@ const EventHeader: React.FC<EventHeaderProps> = ({ title, subtitle, images }) =>
             {subtitle}
           </p>
         </div>
-      </div>
+      </div>*/}
     </header>
   );
 };
