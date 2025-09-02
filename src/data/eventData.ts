@@ -5,6 +5,7 @@ export const allEvents: EventData[] = [
     id: 'congreso002',
     title: 'Congreso Académico Nacional',
     subtitle: 'Santa Cruz Paraíso del Oriente',
+    heroImage: 'https://unifranz.edu.bo/wp-content/uploads/2023/02/SANTA-CRUZ.jpg',
     images: [
       'images/sc01.jpg',
       'images/sc02.jpg',
@@ -52,6 +53,7 @@ export const allEvents: EventData[] = [
     id: 'techsummit001',
     title: 'Tech Innovate Summit 2025',
     subtitle: 'El Futuro es Ahora',
+    heroImage: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     images: [
     'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     ],
