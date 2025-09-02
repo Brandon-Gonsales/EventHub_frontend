@@ -1,12 +1,34 @@
 import React from 'react';
+import { useParams, Link, Navigate } from 'react-router-dom'; // Se importan hooks y componentes de react-router-dom
 import { EventData } from '../types';
 
+// Se actualizan las props: ahora recibe la lista de todos los eventos
 interface EventSplashPageProps {
-  event: EventData;
-  onProceed: () => void;
+  events: EventData[];
 }
 
-const EventSplashPage: React.FC<EventSplashPageProps> = ({ event, onProceed }) => {
+const EventSplashPage: React.FC<EventSplashPageProps> = ({ events }) => {
+  // Se obtiene el 'eventId' de los parámetros de la URL (ej: /event/evento-1)
+  const { eventId } = useParams<{ eventId: string }>();
+  
+  // Se busca el evento correspondiente en el array de eventos
+  const event = events.find(e => e.id === eventId);
+
+  // Si no se encuentra el evento, se puede mostrar un mensaje o redirigir
+  if (!event) {
+    // Opción 1: Mostrar un mensaje de error
+    return (
+      <div className="text-center py-20">
+        <h2 className="text-2xl text-slate-400">Evento no encontrado.</h2>
+        <Link to="/" className="text-sky-400 hover:text-sky-300 mt-4 inline-block">
+          Volver al inicio
+        </Link>
+      </div>
+    );
+    // Opción 2: Redirigir a la página de inicio (descomentar si se prefiere)
+    // return <Navigate to="/" replace />;
+  }
+
   return (
     <div 
       className="relative min-h-[calc(100vh-5rem)] w-full bg-cover bg-center flex items-center justify-center text-white" 
@@ -20,12 +42,13 @@ const EventSplashPage: React.FC<EventSplashPageProps> = ({ event, onProceed }) =
         <p className="mt-2 text-xl md:text-2xl font-light text-sky-300 drop-shadow-md">
           {event.subtitle}
         </p>
-        <button 
-          onClick={onProceed}
-          className="mt-12 bg-sky-600 text-white font-bold py-4 px-10 rounded-lg text-xl hover:bg-sky-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
+        {/* El botón ahora es un Link que navega a la página de compra */}
+        <Link 
+          to={`/event/${event.id}/purchase`}
+          className="mt-12 inline-block bg-sky-600 text-white font-bold py-4 px-10 rounded-lg text-xl hover:bg-sky-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
         >
           Adquirir Entradas
-        </button>
+        </Link>
       </div>
     </div>
   );
