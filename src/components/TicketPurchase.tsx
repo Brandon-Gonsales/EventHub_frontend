@@ -131,7 +131,7 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
     payload.append('department', formData.department);
     payload.append('institution', formData.institution);
     payload.append('career', formData.career);
-    payload.append('vendorCode', formData.vendorCode);
+    payload.append('resellerCode', formData.resellerCode);
     
     const selectedServiceNames = eventData.services
         ?.filter(service => selectedServices[service.id])
