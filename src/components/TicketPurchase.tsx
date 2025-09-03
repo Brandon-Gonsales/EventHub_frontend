@@ -344,7 +344,13 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
                     <input type="checkbox" id={service.id} name={service.id} checked={selectedServices[service.id] || false} onChange={() => handleServiceChange(service)} disabled={service.type === 'mandatory'} className="h-5 w-5 rounded border-gray-300 text-sky-600 focus:ring-sky-500 disabled:opacity-50"/>
                     <span className={`ml-3 text-white ${service.type === 'mandatory' ? 'text-slate-400' : ''}`}>{service.name}</span>
                   </div>
-                  <span className="font-semibold text-slate-300">Bs. {service.price}</span>
+                  <span className="font-semibold text-slate-300">
+                    Bs. {
+                      service.type === 'mandatory'
+                        ? (formData.academicDegree === 'estudiante' ? eventData.pricingTiers?.student : eventData.pricingTiers?.professional)
+                        : service.price
+                    }
+                  </span>
                 </label>
               ))}
             </div>
