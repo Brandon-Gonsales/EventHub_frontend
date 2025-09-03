@@ -28,17 +28,17 @@ export const allEvents: EventData[] = [
     ],
     category: 'Congreso',
     categoryColor: 'bg-sky-500',
-    date: '18-20 SEP, 2025',
-    time: '20:00 HRS',
+    date: '18-19-20 SEP, 2025',
+    time: '',
     location: 'Santa Cruz de la Sierra',
-    address: 'Avenida Siempreviva, #742',
-    description: [
-      "El Congreso Académico Nacional de Universidades es el encuentro más destacado del año para la comunidad educativa...",
-      "✨ ¿Qué vivirás?",
-      "🎉 Fiesta de Bienvenida con Sabor Cruceño...",
-      "🧠 Conferencias que Inspiran...",
-      "🌆 Guía Turística VIP...",
-      "🔥 Y Mucho Más..."
+    address: 'U.A.G.R.M.',
+    description: [      
+    "El Congreso Académico Nacional de Universidades es el encuentro más destacado del año para la comunidad educativa...",
+    "✨ ¿Qué vivirás?",
+    "🎉 Fiesta de Bienvenida con Sabor Cruceño...",
+    "🧠 Conferencias que Inspiran...",
+    "🌆 Guía Turística VIP...",
+    "🔥 Y Mucho Más..."
     ],
     ticketPurchaseUrl: 'https://www.example.com/tickets/congreso-universitario-2025',
     services: [

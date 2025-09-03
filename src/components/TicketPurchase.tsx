@@ -14,6 +14,29 @@ import {
   EventService,
 } from '../types';
 
+const validResellerCodes = [
+  'DAVO01',
+  'DAVO02',
+  'DAVO03',
+  'DAVO04',
+  'DAVO05',
+  'DAVO06',
+  'DAVO07',
+  'DAVO08',
+  'DAVO09',
+  'DAVO10',
+  'NONO01',
+  'NONO02',
+  'NONO03',
+  'NONO04',
+  'NONO05',
+  'NONO06',
+  'NONO07',
+  'NONO08',
+  'NONO09',
+  'NONO10',
+];
+
 const initializeServices = (services: EventService[] = []): Record<string, boolean> => {
   return services.reduce((acc, service) => {
     acc[service.id] = service.type === 'mandatory';
@@ -36,7 +59,7 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
     phone: '',
     institution: '',
     career: '',
-    vendorCode: '',
+    resellerCode: '',
   });
 
   const [selectedServices, setSelectedServices] = useState<Record<string, boolean>>(
@@ -274,10 +297,25 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
             <input type="text" id="career" name="career" value={formData.career} onChange={handleInputChange} placeholder="Ej. Ingeniería de Sistemas" required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"/>
           </div>
 
-          <div>
-            <label htmlFor="vendorCode" className="block text-sm font-medium text-slate-300 mb-1">Código de Vendedor (Opcional)</label>
-            <input type="text" id="vendorCode" name="vendorCode" value={formData.vendorCode} onChange={handleInputChange} placeholder="Ej. DATAHUB01" className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"/>
-          </div>
+         <div>
+          <label htmlFor="resellerCode" className="block text-sm font-medium text-slate-300 mb-1">
+            Código de Revendedor (Opcional)
+          </label>
+          <select
+            id="resellerCode"
+            name="resellerCode" // <-- 2. Añadido el atributo 'name'
+            value={formData.resellerCode} // <-- 3. Conectado al estado formData
+            onChange={handleInputChange} // <-- 4. Usando la función existente
+            className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"
+          >
+            <option value="">Selecciona un código...</option>
+            {validResellerCodes.map(code => (
+              <option key={code} value={code}>
+                {code}
+              </option>
+            ))}
+          </select>
+        </div>
           
           <div>
             <label className="block text-sm font-medium text-slate-300 mb-2">Selecciona tus Servicios</label>
