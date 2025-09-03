@@ -81,14 +81,32 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
   }, [formData.department]);
 
   useEffect(() => {
-    const amount = eventData.services?.reduce((total, service) => {
-      if (selectedServices[service.id]) {
+    // 1. Nos aseguramos de que el evento tenga la información de precios que añadimos en eventData.ts
+    if (!eventData.pricingTiers) {
+      console.error("Datos de precios no encontrados para este evento.");
+      return;
+    }
+
+    // 2. Determinamos el precio base correcto mirando el valor del formulario
+    const basePrice = formData.academicDegree === 'estudiante'
+      ? eventData.pricingTiers.student     // Si es estudiante, el precio es 250
+      : eventData.pricingTiers.professional; // Si no, es profesional, y el precio es 300
+
+    // 3. Calculamos el costo de los servicios EXTRA (opcionales) que el usuario haya marcado
+    const additionalServicesCost = eventData.services?.reduce((total, service) => {
+      // Solo sumamos el precio si el servicio está seleccionado Y NO es el de inscripción obligatoria
+      if (selectedServices[service.id] && service.type !== 'mandatory') {
         return total + service.price;
       }
       return total;
     }, 0) || 0;
-    setTotalAmount(amount);
-  }, [selectedServices, eventData.services]);
+
+    // 4. El total final es la suma del precio base + los servicios extra
+    setTotalAmount(basePrice + additionalServicesCost);
+
+  // 5. ¡MUY IMPORTANTE! Le decimos a React que vuelva a ejecutar este cálculo si cambia
+  // la selección de servicios O si cambia el grado académico.
+  }, [selectedServices, eventData.services, eventData.pricingTiers, formData.academicDegree]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {

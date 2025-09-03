@@ -25,6 +25,11 @@ export interface EventData {
   ticketPurchaseUrl: string;
   category: string;
   categoryColor: string;
+  pricingTiers?: {
+    student: number;
+    professional: number;
+  };
+  
   services?: EventService[];
   pricingNotes?: string[];
 }

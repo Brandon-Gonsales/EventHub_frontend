@@ -41,8 +41,12 @@ export const allEvents: EventData[] = [
     "🔥 Y Mucho Más..."
     ],
     ticketPurchaseUrl: 'https://www.example.com/tickets/congreso-universitario-2025',
+    pricingTiers: {
+      student: 250,
+      professional: 300,
+    },
     services: [
-      { id: 'inscription', name: 'Inscripción', price: 250, type: 'mandatory' },
+      { id: 'inscription', name: 'Inscripción General', price: 0, type: 'mandatory' },
       { id: 'lodging', name: 'Hospedaje', price: 360, type: 'optional' },
       { id: 'groundTransport', name: 'Transporte Terrestre', price: 400, type: 'exclusive', exclusiveGroup: 'transport' },
       { id: 'airTransport', name: 'Transporte Aéreo', price: 1400, type: 'exclusive', exclusiveGroup: 'transport' }
@@ -67,8 +71,15 @@ export const allEvents: EventData[] = [
       "Únete a los líderes de la industria tecnológica en el Tech Innovate Summit. Tres días de keynotes, talleres y networking para explorar las últimas tendencias en IA, blockchain y desarrollo de software."
     ],
     ticketPurchaseUrl: 'https://www.example.com/tickets/tech-innovate-2025',
+   
+
+      pricingTiers: {
+      student: 300,
+      professional: 300,
+    },
+    
     services: [
-      { id: 'inscription-tech', name: 'Acceso General', price: 300, type: 'mandatory' },
+      { id: 'inscription-tech', name: 'Acceso General', price: 0, type: 'mandatory' },
       { id: 'workshop-ai', name: 'Taller de IA Avanzada', price: 150, type: 'optional' },
       { id: 'workshop-web3', name: 'Taller de Web3 y Blockchain', price: 150, type: 'optional' }
     ],
