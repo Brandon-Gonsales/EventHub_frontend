@@ -150,7 +150,7 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [availableUniversities, setAvailableUniversities] = useState<University[]>([]);
   const [currentStep, setCurrentStep] = useState(1);
-  const qrCodeImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(eventData.ticketPurchaseUrl)}&qzone=1&color=dadae8&bgcolor=1e293b`;
+  const qrCodeImageUrl = '/images/qr-pago.png'; 
 
 useEffect(() => {
   const universities = getUniversitiesByDepartment(formData.department);
