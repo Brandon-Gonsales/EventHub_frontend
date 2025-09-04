@@ -43,7 +43,86 @@ const initializeServices = (services: EventService[] = []): Record<string, boole
     return acc;
   }, {} as Record<string, boolean>);
 };
-
+const FormFields: React.FC<{
+  formData: any;
+  handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  handleServiceChange: (service: EventService) => void;
+  availableUniversities: University[];
+  selectedServices: Record<string, boolean>;
+  eventData: EventData;
+}> = ({ formData, handleInputChange, handleServiceChange, availableUniversities, selectedServices, eventData }) => (
+  <>
+    <div className="grid grid-cols-2 gap-4">
+      <div>
+        <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-1">Nombre</label>
+        <input type="text" id="name" name="name" value={formData.name} onChange={handleInputChange} required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"/>
+      </div>
+      <div>
+        <label htmlFor="lastName" className="block text-sm font-medium text-slate-300 mb-1">Apellidos</label>
+        <input type="text" id="lastName" name="lastName" value={formData.lastName} onChange={handleInputChange} required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"/>
+      </div>
+    </div>
+    <div>
+      <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-1">Correo Electrónico</label>
+      <input type="email" id="email" name="email" value={formData.email} onChange={handleInputChange} required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"/>
+    </div>
+    <div>
+      <label htmlFor="phone" className="block text-sm font-medium text-slate-300 mb-1">Teléfono/Celular</label>
+      <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleInputChange} required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"/>
+    </div>
+    <div>
+      <label htmlFor="academicDegree" className="block text-sm font-medium text-slate-300 mb-1">Grado Académico</label>
+      <select id="academicDegree" name="academicDegree" value={formData.academicDegree} onChange={handleInputChange} className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition">
+        <option value="estudiante">Estudiante</option>
+        <option value="profesional">Profesional</option>
+      </select>
+    </div>
+    <div>
+      <label htmlFor="department" className="block text-sm font-medium text-slate-300 mb-1">Departamento</label>
+      <select id="department" name="department" value={formData.department} onChange={handleInputChange} className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition">
+        {DEPARTMENTS.map(dep => (<option key={dep.value} value={dep.value}>{dep.label}</option>))}
+      </select>
+    </div>
+    <div>
+      <label htmlFor="institution" className="block text-sm font-medium text-slate-300 mb-1">Institución</label>
+      <select id="institution" name="institution" value={formData.institution} onChange={handleInputChange} required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition">
+        <option value="" disabled>Selecciona tu universidad</option>
+        {availableUniversities.map(uni => (<option key={uni.id} value={uni.name}>{uni.name}</option>))}
+      </select>
+    </div>
+    <div>
+      <label htmlFor="career" className="block text-sm font-medium text-slate-300 mb-1">Carrera</label>
+      <input type="text" id="career" name="career" value={formData.career} onChange={handleInputChange} required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"/>
+    </div>
+    <div>
+        <label htmlFor="resellerCode" className="block text-sm font-medium text-slate-300 mb-1">Código de Revendedor (Opcional)</label>
+        <select id="resellerCode" name="resellerCode" value={formData.resellerCode} onChange={handleInputChange} className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white ...">
+          <option value="">Selecciona un código...</option>
+          {validResellerCodes.map(code => (<option key={code} value={code}>{code}</option>))}
+        </select>
+    </div>
+    <div>
+      <label className="block text-sm font-medium text-slate-300 mb-2">Selecciona tus Servicios</label>
+      <div className="space-y-3">
+        {eventData.services?.map(service => (
+          <label key={service.id} htmlFor={service.id} className="flex items-center justify-between p-3 bg-slate-900 rounded-md border border-slate-700 transition cursor-pointer hover:border-sky-500">
+            <div className="flex items-center">
+              <input type="checkbox" id={service.id} name={service.id} checked={selectedServices[service.id] || false} onChange={() => handleServiceChange(service)} disabled={service.type === 'mandatory'} className="h-5 w-5 rounded border-gray-300 text-sky-600 focus:ring-sky-500"/>
+              <span className="ml-3 text-white">{service.name}</span>
+            </div>
+            <span className="font-semibold text-slate-300">
+              Bs. {
+                service.type === 'mandatory'
+                  ? (formData.academicDegree === 'estudiante' ? eventData.pricingTiers?.student : eventData.pricingTiers?.professional)
+                  : service.price
+              }
+            </span>
+          </label>
+        ))}
+      </div>
+    </div>
+  </>
+);
 interface TicketPurchaseProps {
   eventData: EventData;
 }
@@ -228,79 +307,7 @@ const isStep2Valid = useMemo(() => {
 // --- RENDERIZADO DEL COMPONENTE ---
 
 // Componente reutilizable que contiene todos los campos del formulario
-const FormFields = () => (
-  <>
-    <div className="grid grid-cols-2 gap-4">
-      <div>
-        <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-1">Nombre</label>
-        <input type="text" id="name" name="name" value={formData.name} onChange={handleInputChange} required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"/>
-      </div>
-      <div>
-        <label htmlFor="lastName" className="block text-sm font-medium text-slate-300 mb-1">Apellidos</label>
-        <input type="text" id="lastName" name="lastName" value={formData.lastName} onChange={handleInputChange} required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"/>
-      </div>
-    </div>
-    <div>
-      <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-1">Correo Electrónico</label>
-      <input type="email" id="email" name="email" value={formData.email} onChange={handleInputChange} required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"/>
-    </div>
-    <div>
-      <label htmlFor="phone" className="block text-sm font-medium text-slate-300 mb-1">Teléfono/Celular</label>
-      <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleInputChange} required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"/>
-    </div>
-    <div>
-      <label htmlFor="academicDegree" className="block text-sm font-medium text-slate-300 mb-1">Grado Académico</label>
-      <select id="academicDegree" name="academicDegree" value={formData.academicDegree} onChange={handleInputChange} className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition">
-        <option value="estudiante">Estudiante</option>
-        <option value="profesional">Profesional</option>
-      </select>
-    </div>
-    <div>
-      <label htmlFor="department" className="block text-sm font-medium text-slate-300 mb-1">Departamento</label>
-      <select id="department" name="department" value={formData.department} onChange={handleInputChange} className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition">
-        {DEPARTMENTS.map(dep => (<option key={dep.value} value={dep.value}>{dep.label}</option>))}
-      </select>
-    </div>
-    <div>
-      <label htmlFor="institution" className="block text-sm font-medium text-slate-300 mb-1">Institución</label>
-      <select id="institution" name="institution" value={formData.institution} onChange={handleInputChange} required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition">
-        <option value="" disabled>Selecciona tu universidad</option>
-        {availableUniversities.map(uni => (<option key={uni.id} value={uni.name}>{uni.name}</option>))}
-      </select>
-    </div>
-    <div>
-      <label htmlFor="career" className="block text-sm font-medium text-slate-300 mb-1">Carrera</label>
-      <input type="text" id="career" name="career" value={formData.career} onChange={handleInputChange} required className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white placeholder-slate-500 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"/>
-    </div>
-    <div>
-        <label htmlFor="resellerCode" className="block text-sm font-medium text-slate-300 mb-1">Código de Revendedor (Opcional)</label>
-        <select id="resellerCode" name="resellerCode" value={formData.resellerCode} onChange={handleInputChange} className="w-full bg-slate-900 border border-slate-700 rounded-md p-2 text-white ...">
-          <option value="">Selecciona un código...</option>
-          {validResellerCodes.map(code => (<option key={code} value={code}>{code}</option>))}
-        </select>
-    </div>
-    <div>
-      <label className="block text-sm font-medium text-slate-300 mb-2">Selecciona tus Servicios</label>
-      <div className="space-y-3">
-        {eventData.services?.map(service => (
-          <label key={service.id} htmlFor={service.id} className="flex items-center justify-between p-3 bg-slate-900 rounded-md border border-slate-700 transition cursor-pointer hover:border-sky-500">
-            <div className="flex items-center">
-              <input type="checkbox" id={service.id} name={service.id} checked={selectedServices[service.id] || false} onChange={() => handleServiceChange(service)} disabled={service.type === 'mandatory'} className="h-5 w-5 rounded border-gray-300 text-sky-600 focus:ring-sky-500"/>
-              <span className="ml-3 text-white">{service.name}</span>
-            </div>
-            <span className="font-semibold text-slate-300">
-              Bs. {
-                service.type === 'mandatory'
-                  ? (formData.academicDegree === 'estudiante' ? eventData.pricingTiers?.student : eventData.pricingTiers?.professional)
-                  : service.price
-              }
-            </span>
-          </label>
-        ))}
-      </div>
-    </div>
-  </>
-);
+
 
 // Renderizado del Paso 3 (Confirmación)
 if (currentStep === 3) {
@@ -329,7 +336,14 @@ return (
     {selectedMethod === 'cash' && (
       <form onSubmit={handleSubmit} className="space-y-4">
           <h4 className="font-semibold text-lg text-white">Paso Único: Registra tus Datos</h4>
-          <FormFields />
+          <FormFields
+  formData={formData}
+  handleInputChange={handleInputChange}
+  handleServiceChange={handleServiceChange}
+  availableUniversities={availableUniversities}
+  selectedServices={selectedServices}
+  eventData={eventData}
+/>
           <button type="submit" disabled={!isStep1Valid || isSubmitting} className="w-full bg-sky-600 text-white font-bold py-3 px-4 rounded-md hover:bg-sky-700 disabled:bg-slate-600 disabled:cursor-not-allowed transition-all">
             {isSubmitting ? 'Enviando...' : `Pre-Registrar y Pagar en Puerta - Bs. ${totalAmount}`}
           </button>
@@ -343,7 +357,14 @@ return (
         {currentStep === 1 && (
           <form className="space-y-4">
             <h4 className="font-semibold text-lg text-white">Paso 1: Registra tus Datos</h4>
-            <FormFields />
+            <FormFields
+  formData={formData}
+  handleInputChange={handleInputChange}
+  handleServiceChange={handleServiceChange}
+  availableUniversities={availableUniversities}
+  selectedServices={selectedServices}
+  eventData={eventData}
+/>
             <button type="button" onClick={handleProceedToPayment} disabled={!isStep1Valid || isSubmitting} className="w-full bg-sky-600 text-white font-bold py-3 px-4 rounded-md hover:bg-sky-700 disabled:bg-slate-600 disabled:cursor-not-allowed transition-all">
               { isSubmitting ? 'Procesando...' : 'Continuar al Pago' }
             </button>
