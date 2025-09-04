@@ -73,11 +73,21 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const qrCodeImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(eventData.ticketPurchaseUrl)}&qzone=1&color=dadae8&bgcolor=1e293b`;
 
-  useEffect(() => {
-    const universities = getUniversitiesByDepartment(formData.department);
-    setAvailableUniversities(universities);
-    setFormData(prev => ({ ...prev, institution: '' }));
-  }, [formData.department]);
+useEffect(() => {
+  const universities = getUniversitiesByDepartment(formData.department);
+  setAvailableUniversities(universities);
+
+  // Limpia la institución seleccionada SOLO SI el departamento ha cambiado
+  // Esto previene que se pierda el foco en otros campos
+  setFormData(prev => {
+    // Si la institución actual ya no está en la nueva lista de universidades, la reseteamos.
+    const isCurrentInstitutionValid = universities.some(uni => uni.name === prev.institution);
+    if (!isCurrentInstitutionValid) {
+      return { ...prev, institution: '' };
+    }
+    return prev; // Si la institución sigue siendo válida, no hacemos nada.
+  });
+}, [formData.department]);
 
   useEffect(() => {
     // 1. Nos aseguramos de que el evento tenga la información de precios que añadimos en eventData.ts
