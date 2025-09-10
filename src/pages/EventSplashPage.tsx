@@ -34,7 +34,7 @@ const EventSplashPage: React.FC<EventSplashPageProps> = ({ events }) => {
 
   return (
     <div
-      className="relative min-h-[calc(100vh-5rem)] w-full bg-cover bg-center flex items-center justify-center text-light-bg"
+      className="relative min-h-[calc(100vh-5rem)] w-full bg-cover bg-center flex items-center justify-center text-light-white"
       style={{ backgroundImage: `url(${event.heroImage})` }}
     >
       <div className="absolute inset-0 bg-black opacity-60"></div>
@@ -42,13 +42,13 @@ const EventSplashPage: React.FC<EventSplashPageProps> = ({ events }) => {
         <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter drop-shadow-lg">
           {event.title}
         </h1>
-        <p className="mt-2 text-xl md:text-2xl font-light text-light-accent drop-shadow-md">
+        <p className="mt-2 text-xl md:text-2xl font-light drop-shadow-md">
           {event.subtitle}
         </p>
         {/* El botón ahora es un Link que navega a la página de compra */}
         <Link
           to={`/event/${event.id}/purchase`}
-          className="mt-12 inline-block bg-light-accent text-light-bg font-bold py-4 px-10 rounded-lg text-xl hover:bg-light-accent_h transform hover:scale-105 transition-all duration-300 shadow-lg"
+          className="mt-12 inline-block bg-light-secondary text-light-primary font-bold py-4 px-10 rounded-lg text-xl hover:bg-light-secondary_h transform hover:scale-105 transition-all duration-300 shadow-lg"
         >
           Adquirir Entradas
         </Link>

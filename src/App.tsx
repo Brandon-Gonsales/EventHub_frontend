@@ -9,7 +9,7 @@ import { allEvents } from "./data/eventData";
 
 const App: React.FC = () => {
   return (
-    <div className="min-h-screen bg-light-bg text-white font-sans flex flex-col">
+    <div className="min-h-screen bg-light-primary text-white font-sans flex flex-col">
       <Header />
       <main className="flex-grow pt-20">
         <Routes>

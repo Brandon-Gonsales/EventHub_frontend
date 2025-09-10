@@ -8,34 +8,34 @@ module.exports = {
     extend: {
       colors: {
         light: {
-          bg: "#F8F9FA", // azul clarito
-          bg_h: "#F8F9FA", // azul clarito
-          primary: "#1C2541", // azul principal
-          primary_h: "#1C2541", // azul principal
-          secondary: "#8A2BE2", // azul oscuro
-          secondary_h: "#8A2BE2", // azul oscuro
-          border: "#f3f4f6", // azul oscuro
-          border_h: "#f3f4f6", // azul oscuro
-          accent: "#61DAFB", // un color suelto (rosa fuerte)
-          accent_h: "#61DAFB", // un color suelto (rosa fuerte)
+          primary: "#EAEBED", // fondo principal, cards, fondo sections
+          primary_h: "#E5E9F0", // hover cards, hover sections
+          secondary: "#006989", // botones, links, iconos
+          secondary_h: "#007090", // hover: botones, links, iconos
+          tertiary: "#01A7C2", // accentos, iconos
+          tertiary_h: "#01A7C2", // hover: accentos
+          fourth: "#A3BAC3", //bordes, iconos
+          fourth_h: "#A3BAC3", // hover: border, iconos
           success: "#28a745", // Verde éxito
           danger: "#dc3545",  // Rojo error
-          warning: "#ffc107",
+          warning: "#ffc107",//Amarillo advertencia
+          black: "#000000", // texto, iconos
+          white: "#FFFFFF", // texto, iconos
         },
         dark: {
-          bg: "#1A1B1E", // azul clarito
-          bg_h: "#151519", // azul clarito
-          primary: "#FFFFFF", // azul principal
-          primary_h: "#FFFFFF", // azul principal
-          secondary: "#2A3964", // azul oscuro
-          secondary_h: "#2A3964", // azul oscuro
-          border: "#f3f4f6", // azul oscuro
-          border_h: "#B0B0B0", // azul oscuro
-          accent: "#E47400", // un color suelto (rosa fuerte)
-          accent_h: "#E47400", // un color suelto (rosa fuerte)ç
+          primary: "#EAEBED", // fondo principal, cards, fondo sections
+          primary_h: "#E5E9F0", // hover cards, hover sections
+          secondary: "#006989", // botones, links, iconos
+          secondary_h: "#007090", // hover: botones, links, iconos
+          tertiary: "#01A7C2", // accentos, iconos
+          tertiary_h: "#01A7C2", // hover: accentos
+          fourth: "#A3BAC3", //bordes, iconos
+          fourth_h: "#A3BAC3", // hover: border, iconos
           success: "#28a745", // Verde éxito
           danger: "#dc3545",  // Rojo error
-          warning: "#ffc107",
+          warning: "#ffc107",//Amarillo advertencia
+          black: "#000000", // texto, iconos
+          white: "#FFFFFF", // texto, iconos
         },
       },
     },

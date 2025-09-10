@@ -3,17 +3,17 @@ import { Link } from "react-router-dom";
 
 const Header: React.FC = () => {
   return (
-    <header className="bg-light-primary backdrop-blur-lg fixed top-0 left-0 right-0 z-50 border-b border-black/20 shadow-lg">
+    <header className="bg-light-primary_h backdrop-blur-lg fixed top-0 left-0 right-0 z-50 border-b border-black/20 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="flex items-center justify-between h-20">
           <Link
             to="/"
-            className="text-2xl font-bold text-light-bg tracking-tighter"
+            className="text-2xl font-bold text-light-secondary tracking-tighter"
             aria-label="EventHub - Volver a la página de inicio"
           >
-            Event<span className="text-light-accent">Hub</span>
+            Event<span className="text-light-tertiary">Hub</span>
           </Link>
-          <span className="text-light-bg hidden md:block">
+          <span className="text-light-black hidden md:block">
             Tu Centro de Eventos
           </span>
         </div>

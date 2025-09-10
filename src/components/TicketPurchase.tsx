@@ -680,6 +680,10 @@ const validResellerCodes = [
 // };
 
 // export default TicketPurchase;
+
+
+
+
 const initializeServices = (
   services: EventService[] = []
 ): Record<string, boolean> => {
@@ -711,7 +715,7 @@ const FormFields: React.FC<{
       <div>
         <label
           htmlFor="name"
-          className="block text-sm font-medium text-gray-700 mb-1"
+          className="block text-sm font-medium text-light-black mb-1"
         >
           Nombre
         </label>
@@ -722,13 +726,13 @@ const FormFields: React.FC<{
           value={formData.name}
           onChange={handleInputChange}
           required
-          className="w-full border border-gray-300 rounded-md p-3 text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+          className="w-full border border-light-fourth rounded-md p-3 text-light-black placeholder-gray-500 focus:ring-2 focus:ring-light-fourth focus:border-light-fourth transition focus:outline-none"
         />
       </div>
       <div>
         <label
           htmlFor="lastName"
-          className="block text-sm font-medium text-gray-700 mb-1"
+          className="block text-sm font-medium text-light-black mb-1"
         >
           Apellidos
         </label>
@@ -739,7 +743,7 @@ const FormFields: React.FC<{
           value={formData.lastName}
           onChange={handleInputChange}
           required
-          className="w-full border border-gray-300 rounded-md p-3 text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+          className="w-full border border-light-fourth rounded-md p-3 text-light-black placeholder-gray-500 focus:ring-2 focus:ring-light-fourth focus:border-light-fourth transition focus:outline-none"
         />
       </div>
     </div>
@@ -748,7 +752,7 @@ const FormFields: React.FC<{
       <div>
         <label
           htmlFor="email"
-          className="block text-sm font-medium text-gray-700 mb-1"
+          className="block text-sm font-medium text-light-black mb-1"
         >
           Correo Electrónico
         </label>
@@ -759,13 +763,13 @@ const FormFields: React.FC<{
           value={formData.email}
           onChange={handleInputChange}
           required
-          className="w-full border border-gray-300 rounded-md p-3 text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+          className="w-full border border-light-fourth rounded-md p-3 text-light-black placeholder-gray-500 focus:ring-2 focus:ring-light-fourth focus:border-light-fourth transition focus:outline-none"
         />
       </div>
       <div>
         <label
           htmlFor="phone"
-          className="block text-sm font-medium text-gray-700 mb-1"
+          className="block text-sm font-medium text-light-black mb-1"
         >
           Teléfono/Celular
         </label>
@@ -776,7 +780,7 @@ const FormFields: React.FC<{
           value={formData.phone}
           onChange={handleInputChange}
           required
-          className="w-full border border-gray-300 rounded-md p-3 text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+          className="w-full border border-light-fourth rounded-md p-3 text-light-black placeholder-gray-500 focus:ring-2 focus:ring-light-fourth focus:border-light-fourth transition focus:outline-none"
         />
       </div>
     </div>
@@ -785,7 +789,7 @@ const FormFields: React.FC<{
       <div>
         <label
           htmlFor="academicDegree"
-          className="block text-sm font-medium text-gray-700 mb-1"
+          className="block text-sm font-medium text-light-black mb-1"
         >
           Grado Académico
         </label>
@@ -794,7 +798,7 @@ const FormFields: React.FC<{
           name="academicDegree"
           value={formData.academicDegree}
           onChange={handleInputChange}
-          className="w-full border border-gray-300 rounded-md p-3 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+          className="w-full border border-light-fourth rounded-md p-3 text-light-black focus:ring-2 focus:ring-light-fourth focus:border-light-fourth transition focus:outline-none"
         >
           <option value="estudiante">Estudiante</option>
           <option value="profesional">Profesional</option>
@@ -803,7 +807,7 @@ const FormFields: React.FC<{
       <div>
         <label
           htmlFor="department"
-          className="block text-sm font-medium text-gray-700 mb-1"
+          className="block text-sm font-medium text-light-black mb-1"
         >
           Departamento
         </label>
@@ -812,7 +816,7 @@ const FormFields: React.FC<{
           name="department"
           value={formData.department}
           onChange={handleInputChange}
-          className="w-full border border-gray-300 rounded-md p-3 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+          className="w-full border border-light-fourth rounded-md p-3 text-light-black focus:ring-2 focus:ring-light-fourth focus:border-light-fourth transition focus:outline-none"
         >
           {DEPARTMENTS.map((dep) => (
             <option key={dep.value} value={dep.value}>
@@ -826,7 +830,7 @@ const FormFields: React.FC<{
     <div>
       <label
         htmlFor="institution"
-        className="block text-sm font-medium text-gray-700 mb-1"
+        className="block text-sm font-medium text-light-black mb-1"
       >
         Institución
       </label>
@@ -836,7 +840,7 @@ const FormFields: React.FC<{
         value={formData.institution}
         onChange={handleInputChange}
         required
-        className="w-full border border-gray-300 rounded-md p-3 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+        className="w-full border border-light-fourth rounded-md p-3 text-light-black focus:ring-2 focus:ring-light-fourth focus:border-light-fourth transition focus:outline-none"
       >
         <option value="" disabled>
           Selecciona tu universidad
@@ -853,7 +857,7 @@ const FormFields: React.FC<{
       <div>
         <label
           htmlFor="career"
-          className="block text-sm font-medium text-gray-700 mb-1"
+          className="block text-sm font-medium text-light-black mb-1"
         >
           Carrera
         </label>
@@ -864,13 +868,13 @@ const FormFields: React.FC<{
           value={formData.career}
           onChange={handleInputChange}
           required
-          className="w-full border border-gray-300 rounded-md p-3 text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+          className="w-full border border-light-fourth rounded-md p-3 text-light-black placeholder-gray-500 focus:ring-2 focus:ring-light-fourth focus:border-light-fourth transition focus:outline-none"
         />
       </div>
       <div>
         <label
           htmlFor="resellerCode"
-          className="block text-sm font-medium text-gray-700 mb-1"
+          className="block text-sm font-medium text-light-black mb-1"
         >
           Código de Revendedor (Opcional)
         </label>
@@ -879,7 +883,7 @@ const FormFields: React.FC<{
           name="resellerCode"
           value={formData.resellerCode}
           onChange={handleInputChange}
-          className="w-full border border-gray-300 rounded-md p-3 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+          className="w-full border border-light-fourth rounded-md p-3 text-light-black focus:ring-2 focus:ring-light-fourth focus:border-light-fourth transition focus:outline-none"
         >
           <option value="">Selecciona un código...</option>
           {validResellerCodes.map((code) => (
@@ -892,7 +896,7 @@ const FormFields: React.FC<{
     </div>
 
     <div>
-      <label className="block text-sm font-medium text-gray-700 mb-3">
+      <label className="block text-sm font-medium text-light-black mb-3">
         Selecciona tus Servicios
       </label>
       <div className="space-y-3">
@@ -900,7 +904,7 @@ const FormFields: React.FC<{
           <label
             key={service.id}
             htmlFor={service.id}
-            className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-200 transition cursor-pointer hover:border-blue-300 hover:bg-blue-50"
+            className="flex items-center justify-between p-4 rounded-lg border border-light-fourth transition cursor-pointer hover:border-light-fourth hover:bg-light-primary_h"
           >
             <div className="flex items-center">
               <input
@@ -910,13 +914,13 @@ const FormFields: React.FC<{
                 checked={selectedServices[service.id] || false}
                 onChange={() => handleServiceChange(service)}
                 disabled={service.type === "mandatory"}
-                className="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                className="h-5 w-5 rounded border-light-fourth text-light-primary focus:ring-light-fourth"
               />
-              <span className="ml-3 text-gray-900 font-medium">
+              <span className="ml-3 text-light-black font-medium">
                 {service.name}
               </span>
             </div>
-            <span className="font-semibold text-gray-700">
+            <span className="font-semibold text-light-black">
               Bs.{" "}
               {service.type === "mandatory"
                 ? formData.academicDegree === "estudiante"
@@ -1120,8 +1124,8 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
     const baseClasses =
       "flex-1 p-4 rounded-lg text-left transition-all duration-300 flex items-center space-x-3 text-lg font-semibold border-2";
     return selectedMethod === method
-      ? `${baseClasses} bg-blue-600 text-white border-blue-600 shadow-lg`
-      : `${baseClasses} bg-white text-gray-700 border-gray-300 hover:border-blue-300 hover:bg-blue-50`;
+      ? `${baseClasses} bg-light-secondary text-primary border-light-fourth shadow-lg`
+      : `${baseClasses} text-light-secondary hover:text-light-primary border-light-fourth hover:border-light-fourth_h hover:bg-light-secondary_h`;
   };
 
   if (currentStep === 3) {
@@ -1142,8 +1146,8 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6">
-      <h3 className="text-2xl font-bold text-gray-900 border-b-2 border-blue-600 pb-3 mb-6">
+    <div className="">
+      <h3 className="text-2xl font-bold text-light-black border-b-2 border-light-fourth pb-3 mb-6">
         Adquiere tu Entrada
       </h3>
 
@@ -1172,7 +1176,7 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
 
       {selectedMethod === "cash" && (
         <form onSubmit={handleSubmit} className="space-y-6">
-          <h4 className="font-semibold text-xl text-gray-900 mb-4">
+          <h4 className="font-semibold text-xl text-light-secondary mb-4">
             Registra tus Datos
           </h4>
           <FormFields
@@ -1199,7 +1203,7 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
         <>
           {currentStep === 1 && (
             <form className="space-y-6">
-              <h4 className="font-semibold text-xl text-gray-900 mb-4">
+              <h4 className="font-semibold text-xl text-light-secondary mb-4">
                 Paso 1: Registra tus Datos
               </h4>
               <FormFields
@@ -1214,7 +1218,7 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
                 type="button"
                 onClick={handleProceedToPayment}
                 disabled={!isStep1Valid || isSubmitting}
-                className="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all text-lg"
+                className="w-full bg-light-secondary text-light-primary font-bold py-3 px-4 rounded-lg hover:bg-light-secondary_h disabled:bg-gray-400 disabled:cursor-not-allowed transition-all text-lg"
               >
                 {isSubmitting
                   ? "Procesando..."
@@ -1226,35 +1230,35 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
           {currentStep === 2 && (
             <div className="grid md:grid-cols-2 gap-8">
               <div className="text-center">
-                <h4 className="font-semibold text-xl text-gray-900 mb-6">
+                <h4 className="font-semibold text-xl text-light-black mb-6">
                   Paso 2: Realiza el Pago
                 </h4>
-                <div className="bg-gray-50 p-6 rounded-lg border-2 border-dashed border-gray-300">
+                <div className="bg-light-primary_h p-6 rounded-lg border-2 border-dashed border-light-fourth">
                   <img
                     src={qrCodeImageUrl}
                     alt="QR Code para pago"
                     className="mx-auto rounded-lg shadow-md mb-4"
                   />
-                  <p className="text-lg font-semibold text-gray-900">
+                  <p className="text-lg font-semibold text-light-black">
                     Monto: Bs. {totalAmount}
                   </p>
                 </div>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
-                <h4 className="font-semibold text-xl text-gray-900 mb-4">
+                <h4 className="font-semibold text-xl text-light-black mb-4">
                   Sube tu Comprobante
                 </h4>
                 <div>
                   <label
                     htmlFor="proof"
-                    className="block w-full border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer hover:border-blue-400 hover:bg-blue-50 transition-colors"
+                    className="block w-full border-2 border-dashed border-light-fourth rounded-lg p-6 text-center cursor-pointer hover:border-light-fourth_h hover:bg-light-primary_h transition-colors"
                   >
-                    <UploadIcon className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                    <span className="text-lg text-gray-600">
+                    <UploadIcon className="w-12 h-12 text-light-secondary mx-auto mb-4" />
+                    <span className="text-lg text-light-secondary">
                       {proofFile ? proofFile.name : "Subir comprobante de pago"}
                     </span>
-                    <p className="text-sm text-gray-500 mt-2">
+                    <p className="text-sm text-light-secondary mt-2">
                       Formatos: JPG, PNG, PDF
                     </p>
                   </label>
@@ -1270,7 +1274,7 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
                 <button
                   type="submit"
                   disabled={!isStep2Valid || isSubmitting}
-                  className="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all text-lg"
+                  className="w-full bg-light-secondary text-light-primary font-bold py-3 px-4 rounded-lg hover:bg-light-secondary_h disabled:bg-gray-400 disabled:cursor-not-allowed transition-all text-lg"
                 >
                   {isSubmitting ? "Finalizando..." : "Finalizar Registro"}
                 </button>

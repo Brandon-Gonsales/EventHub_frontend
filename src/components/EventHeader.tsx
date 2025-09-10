@@ -106,11 +106,11 @@ const EventHeader: React.FC<EventHeaderProps> = ({ images, event }) => {
       {/* Overlay oscuro simple para mejor contraste */}
       <div className="absolute inset-0 bg-black bg-opacity-40 z-10" />
 
-      <div className="absolute inset-0 flex items-center justify-center px-4 sm:px-6 lg:px-8 z-20">
+      {/* <div className="absolute inset-0 flex items-center justify-center px-4 sm:px-6 lg:px-8 z-20">
         <div className="w-full max-w-4xl mx-auto">
           <EventDetails event={event} />
         </div>
-      </div>
+      </div> */}
     </header>
   );
 };
