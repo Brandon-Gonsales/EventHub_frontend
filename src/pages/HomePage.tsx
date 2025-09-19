@@ -86,7 +86,7 @@ const HomePage: React.FC<HomePageProps> = ({ events }) => {
   const [heroEvent, ...otherEvents] = events;
 
   return (
-    <div className="max-container mx-auto">
+    <div className="max-w-7xl mx-auto">
       {/* Se pasa solo el evento, sin la función onSelect */}
       <HeroSection event={heroEvent} />
 
