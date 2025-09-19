@@ -120,7 +120,7 @@ const FormFields: React.FC<{
           value={formData.name}
           onChange={handleInputChange}
           required
-          className="w-full border dark:bg-dark-primary_h border-light-fourth rounded-md p-3 text-light-black dark:text-dark-secondary placeholder-gray-500 focus:ring-2 focus:ring-light-fourth focus:border-light-fourth transition focus:outline-none"
+          className="w-full border dark:bg-dark-primary border-light-primary_h rounded-lg p-3 text-light-black dark:text-dark-secondary placeholder-gray-500 focus:ring-2 focus:ring-light-fourth focus:border-light-fourth transition focus:outline-none dark:border-dark-fourth"
         />
       </div>
       <div>
@@ -137,7 +137,7 @@ const FormFields: React.FC<{
           value={formData.lastName}
           onChange={handleInputChange}
           required
-          className="w-full border dark:bg-dark-primary_h border-light-fourth rounded-md p-3 text-light-black dark:text-dark-secondary placeholder-gray-500 focus:ring-2 focus:ring-light-fourth focus:border-light-fourth transition focus:outline-none"
+          className="w-full border dark:bg-dark-primary border-light-primary_h rounded-lg p-3 text-light-black dark:text-dark-secondary placeholder-gray-500 focus:ring-2 focus:ring-light-fourth focus:border-light-fourth transition focus:outline-none dark:border-dark-fourth"
         />
       </div>
     </div>
@@ -157,7 +157,7 @@ const FormFields: React.FC<{
           value={formData.email}
           onChange={handleInputChange}
           required
-          className="w-full border dark:bg-dark-primary_h border-light-fourth rounded-md p-3 text-light-black dark:text-dark-secondary placeholder-gray-500 focus:ring-2 focus:ring-light-fourth focus:border-light-fourth transition focus:outline-none"
+          className="w-full border dark:bg-dark-primary border-light-primary_h rounded-lg p-3 text-light-black dark:text-dark-secondary placeholder-gray-500 focus:ring-2 focus:ring-light-fourth focus:border-light-fourth transition focus:outline-none dark:border-dark-fourth"
         />
       </div>
       <div>
@@ -174,7 +174,7 @@ const FormFields: React.FC<{
           value={formData.phone}
           onChange={handleInputChange}
           required
-          className="w-full border dark:bg-dark-primary_h border-light-fourth rounded-md p-3 text-light-black dark:text-dark-secondary placeholder-gray-500 focus:ring-2 focus:ring-light-fourth focus:border-light-fourth transition focus:outline-none"
+          className="w-full border dark:bg-dark-primary border-light-primary_h rounded-lg p-3 text-light-black dark:text-dark-secondary placeholder-gray-500 focus:ring-2 focus:ring-light-fourth focus:border-light-fourth transition focus:outline-none dark:border-dark-fourth"
         />
       </div>
     </div>
@@ -192,7 +192,7 @@ const FormFields: React.FC<{
           name="academicDegree"
           value={formData.academicDegree}
           onChange={handleInputChange}
-          className="w-full border dark:bg-dark-primary_h border-light-fourth rounded-md p-3 text-light-black dark:text-dark-secondary focus:ring-2 focus:ring-light-fourth focus:border-light-fourth transition focus:outline-none"
+          className="w-full border dark:bg-dark-primary border-light-primary_h rounded-lg p-3 text-light-black dark:text-dark-secondary focus:ring-2 focus:ring-light-fourth focus:border-light-fourth transition focus:outline-none dark:border-dark-fourth"
         >
           <option value="estudiante">Estudiante</option>
           <option value="profesional">Profesional</option>
@@ -210,7 +210,7 @@ const FormFields: React.FC<{
           name="department"
           value={formData.department}
           onChange={handleInputChange}
-          className="w-full border dark:bg-dark-primary_h border-light-fourth rounded-md p-3 text-light-black dark:text-dark-secondary focus:ring-2 focus:ring-light-fourth focus:border-light-fourth transition focus:outline-none"
+          className="w-full border dark:bg-dark-primary border-light-primary_h rounded-lg p-3 text-light-black dark:text-dark-secondary focus:ring-2 focus:ring-light-fourth focus:border-light-fourth transition focus:outline-none dark:border-dark-fourth"
         >
           {DEPARTMENTS.map((dep) => (
             <option key={dep.value} value={dep.value}>
@@ -234,7 +234,7 @@ const FormFields: React.FC<{
         value={formData.institution}
         onChange={handleInputChange}
         required
-        className="w-full border dark:bg-dark-primary_h border-light-fourth rounded-md p-3 text-light-black dark:text-dark-secondary focus:ring-2 focus:ring-light-fourth focus:border-light-fourth transition focus:outline-none"
+        className="w-full border dark:bg-dark-primary border-light-primary_h rounded-lg p-3 text-light-black dark:text-dark-secondary focus:ring-2 focus:ring-light-fourth focus:border-light-fourth transition focus:outline-none dark:border-dark-fourth"
       >
         <option value="" disabled>
           Selecciona tu universidad
@@ -262,7 +262,7 @@ const FormFields: React.FC<{
           value={formData.career}
           onChange={handleInputChange}
           required
-          className="w-full border dark:bg-dark-primary_h border-light-fourth rounded-md p-3 text-light-black dark:text-dark-secondary placeholder-gray-500 focus:ring-2 focus:ring-light-fourth focus:border-light-fourth transition focus:outline-none"
+          className="w-full border dark:bg-dark-primary border-light-primary_h rounded-lg p-3 text-light-black dark:text-dark-secondary placeholder-gray-500 focus:ring-2 focus:ring-light-fourth focus:border-light-fourth transition focus:outline-none dark:border-dark-fourth"
         />
       </div>
       <div>
@@ -277,7 +277,7 @@ const FormFields: React.FC<{
           name="resellerCode"
           value={formData.resellerCode}
           onChange={handleInputChange}
-          className="w-full border dark:bg-dark-primary_h border-light-fourth rounded-md p-3 text-light-black dark:text-dark-secondary focus:ring-2 focus:ring-light-fourth focus:border-light-fourth transition focus:outline-none"
+          className="w-full border dark:bg-dark-primary border-light-primary_h rounded-lg p-3 text-light-black dark:text-dark-secondary focus:ring-2 focus:ring-light-fourth focus:border-light-fourth transition focus:outline-none dark:border-dark-fourth"
         >
           <option value="">Selecciona un código...</option>
           {validResellerCodes.map((code) => (
@@ -298,7 +298,7 @@ const FormFields: React.FC<{
           <label
             key={service.id}
             htmlFor={service.id}
-            className="flex items-center justify-between p-4 rounded-lg border border-light-fourth dark:border-dark-fourth transition cursor-pointer hover:border-light-fourth"
+            className="flex items-center justify-between p-4 rounded-lg border border-light-primary_h dark:border-dark-fourth transition cursor-pointer hover:border-light-fourth"
           >
             <div className="flex items-center">
               <input
@@ -308,13 +308,13 @@ const FormFields: React.FC<{
                 checked={selectedServices[service.id] || false}
                 onChange={() => handleServiceChange(service)}
                 disabled={service.type === "mandatory"}
-                className="h-5 w-5 rounded border-light-fourth dark:border-dark-fourth text-light-primary focus:ring-light-fourth"
+                className="h-5 w-5 rounded border-light-primary_h dark:border-dark-fourth text-light-primary focus:ring-light-fourth"
               />
               <span className="ml-3 text-light-black dark:text-dark-secondary font-medium">
                 {service.name}
               </span>
             </div>
-            <span className="font-semibold text-light-black">
+            <span className="font-semibold text-light-black dark:text-dark-secondary">
               Bs.{" "}
               {service.type === "mandatory"
                 ? formData.academicDegree === "estudiante"
@@ -516,10 +516,10 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
 
   const getButtonClass = (method: PaymentMethod) => {
     const baseClasses =
-      "flex-1 p-4 rounded-lg text-left transition-all duration-300 flex items-center space-x-3 text-lg font-semibold border-2";
+      "flex-1 p-4 rounded-lg text-left transition-all duration-300 flex items-center space-x-3 text-lg font-semibold";
     return selectedMethod === method
-      ? `${baseClasses} bg-light-secondary dark:bg-dark-secondary text-primary border-light-fourth dark:border-dark-fourth shadow-lg`
-      : `${baseClasses} text-light-secondary dark:text-dark-secondary hover:text-light-primary border-light-fourth dark:border-dark-fourth hover:border-light-fourth_h hover:bg-light-secondary_h`;
+      ? `${baseClasses} bg-light-secondary dark:bg-dark-secondary text-light-primary dark:text-dark-primary`
+      : `${baseClasses} text-light-secondary dark:text-dark-secondary hover:text-light-primary dark:hover:text-dark-primary border border-light-fourth dark:border-dark-fourth hover:border-light-fourth_h hover:bg-light-secondary_h`;
   };
 
   if (currentStep === 3) {
@@ -541,7 +541,7 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
 
   return (
     <div className="">
-      <h3 className="text-2xl font-bold text-light-black dark:text-dark-secondary dark:border-dark-fourth border-b-2 border-light-fourth dark:border-dark-fourth pb-3 mb-6">
+      <h3 className="text-xl sm:text-2xl font-semibold text-light-black dark:text-dark-secondary pb-3 mb-4">
         Adquiere tu Entrada
       </h3>
 

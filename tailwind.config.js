@@ -9,12 +9,12 @@ module.exports = {
     extend: {
       colors: {
         light: {
-          primary: "#EAEBED", // fondo principal, cards, fondo sections
+          primary: "#FFFFFF", // fondo principal, cards, fondo sections
           primary_h: "#E5E9F0", // hover cards, hover sections
-          secondary: "#006989", // botones, links, iconos
-          secondary_h: "#007090", // hover: botones, links, iconos
-          tertiary: "#01A7C2", // accentos, iconos
-          tertiary_h: "#01A7C2", // hover: accentos
+          secondary: "#231942", // botones, links, iconos
+          secondary_h: "#023047", // hover: botones, links, iconos
+          tertiary: "#0077b6", // accentos, iconos
+          tertiary_h: "#0077b6", // hover: accentos
           fourth: "#A3BAC3", //bordes, iconos
           fourth_h: "#A3BAC3", // hover: border, iconos
           success: "#28a745", // Verde éxito
@@ -28,8 +28,8 @@ module.exports = {
           primary_h: "#282828", // Hover para fondos y tarjetas
           secondary: "#ffffff", // Mantiene el azul principal para botones y links
           secondary_h: "#ffffff", // Mantiene el hover del azul principal
-          tertiary: "#189b8d", // Mantiene el color de acento, que funciona bien en dark mode
-          tertiary_h: "#189b8d", // Mantiene el hover de acento
+          tertiary: "#0077b6", // Mantiene el color de acento, que funciona bien en dark mode
+          tertiary_h: "#0077b6", // Mantiene el hover de acento
           fourth: "#575757", // Bordes más suaves para contrastar con el fondo oscuro
           fourth_h: "#575757", // Hover para bordes
           success: "#28a745", // Verde de éxito (mismo valor)

@@ -9,7 +9,7 @@ interface EventDetailsProps {
 
 const EventDetails: React.FC<EventDetailsProps> = ({ event }) => {
   return (
-    <div className="bg-light-primary dark:bg-dark-primary_h rounded-lg shadow-lg p-4 sm:p-6 md:p-8 lg:p-10 mx-auto max-w-full">
+    <div className="">
       {/* Grid responsivo para fecha y ubicación */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="flex items-start space-x-4">
@@ -44,7 +44,7 @@ const EventDetails: React.FC<EventDetailsProps> = ({ event }) => {
       </div>
 
       <div>
-        <h3 className="text-xl sm:text-2xl font-semibold text-light-black dark:text-dark-secondary mb-4 py-2 border-b-2 border-light-fourth">
+        <h3 className="text-xl sm:text-2xl font-semibold text-light-black dark:text-dark-secondary py-2">
           Sobre el Evento
         </h3>
         <div className="space-y-4">

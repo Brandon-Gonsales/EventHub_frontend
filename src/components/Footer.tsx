@@ -2,8 +2,8 @@ import React from "react";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-light-primary_h dark:bg-dark-primary_h text-light-black dark:text-dark-black py-6">
-      <div className="container mx-auto px-4">
+    <footer className="bg-light-primary border-t border-light-fourth dark:border-dark-fourth dark:bg-dark-primary text-light-black dark:text-dark-black py-6">
+      <div className="px-4 max-w-7xl mx-auto">
         <div className="flex flex-wrap gap-8 justify-between">
           <div>
             <h2 className="text-2xl font-bold text-light-secondary dark:text-dark-secondary tracking-tighter">
@@ -87,7 +87,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 pt-4 text-center text-light-black dark:text-dark-black">
+        <div className="pt-4 text-center text-light-black dark:text-dark-black">
           <p>&copy; 2025 EventHub. Todos los derechos reservados.</p>
         </div>
       </div>

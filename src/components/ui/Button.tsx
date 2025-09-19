@@ -16,10 +16,10 @@ export const Button: React.FC<{
 
   const variants = {
     primary:
-      "bg-light-secondary dark:bg-dark-secondary text-light-black dark:text-dark-white shadow-lg hover:shadow-xl",
+      "bg-light-secondary dark:bg-dark-secondary text-light-primary dark:text-dark-white shadow-lg hover:shadow-xl",
     secondary: "bg-gray-100 text-gray-800 hover:bg-gray-200",
     outline:
-      "border-2 border-light-fourth dark:border-dark-fourth text-light-black dark:text-dark-black",
+      "border border-light-fourth dark:border-dark-fourth text-light-black dark:text-dark-black",
   };
 
   const sizes = {

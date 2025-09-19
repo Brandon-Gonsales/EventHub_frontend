@@ -14,7 +14,7 @@ export const Header: React.FC<{
   const isHome = path === "/";
 
   return (
-    <header className="bg-light-primary_h dark:bg-dark-primary_h border-b border-gray-100 dark:border-gray-800 sticky top-0 z-50 transition-colors duration-300 px-4">
+    <header className="bg-light-primary dark:bg-dark-primary border-b border-light-fourth dark:border-dark-fourth sticky top-0 z-50 transition-colors duration-300 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-8">
