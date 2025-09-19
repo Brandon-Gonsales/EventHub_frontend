@@ -4,10 +4,11 @@ import HomePage from "./pages/HomePage";
 import EventSplashPage from "./pages/EventSplashPage";
 import EventPurchasePage from "./pages/EventPurchasePage";
 import Footer from "./components/Footer";
-import Header from "./components/Header";
+import { Header } from "./components/Header";
 import { allEvents } from "./data/eventData";
 
 const App: React.FC = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const getInitialTheme = () => {
     if (typeof window !== "undefined") {
       const savedTheme = localStorage.getItem("theme");
@@ -32,10 +33,16 @@ const App: React.FC = () => {
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
+
   return (
-    <div className="min-h-screen bg-light-primary dark:bg-dark-primary dark:text-dark- font-sans flex flex-col">
-      <Header theme={theme} toggleTheme={toggleTheme} />
-      <main className="flex-grow pt-20">
+    <div className="min-h-screen bg-light-primary dark:bg-dark-primary dark:text-white font-sans flex flex-col">
+      <Header
+        onMenuToggle={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        isMobileMenuOpen={isMobileMenuOpen}
+        isDark={theme === "dark"}
+        onDarkModeToggle={toggleTheme}
+      />
+      <main className=" flex-grow">
         <Routes>
           <Route path="/" element={<HomePage events={allEvents} />} />
           <Route
