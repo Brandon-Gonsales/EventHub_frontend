@@ -334,6 +334,20 @@ interface TicketPurchaseProps {
 }
 
 const AcademicEventForm: React.FC<TicketPurchaseProps> = ({ eventData }) => {
+  // --- SOLUCIÓN: TYPE GUARD ---
+// Este bloque comprueba si los datos de precios son del tipo correcto.
+if (!eventData.pricingTiers || !('student' in eventData.pricingTiers) || !('professional' in eventData.pricingTiers)) {
+  console.error("Error Crítico: AcademicEventForm recibió datos de un evento sin precios académicos.", eventData);
+  return (
+    <div className="text-center p-8 bg-red-100 dark:bg-red-900 border border-red-400 rounded-lg">
+      <h3 className="text-xl font-bold text-red-800 dark:text-red-200">Error de Configuración</h3>
+      <p className="text-red-600 dark:text-red-300 mt-2">
+        Este componente de formulario no es compatible con el tipo de precios de este evento.
+      </p>
+    </div>
+  );
+}
+// --- FIN DE LA SOLUCIÓN ---
   const [selectedMethod, setSelectedMethod] = useState<PaymentMethod>("qr");
   const [formData, setFormData] = useState({
     name: "",
