@@ -333,7 +333,7 @@ interface TicketPurchaseProps {
   eventData: EventData;
 }
 
-const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
+const AcademicEventForm: React.FC<TicketPurchaseProps> = ({ eventData }) => {
   const [selectedMethod, setSelectedMethod] = useState<PaymentMethod>("qr");
   const [formData, setFormData] = useState({
     name: "",
@@ -681,4 +681,7 @@ const TicketPurchase: React.FC<TicketPurchaseProps> = ({ eventData }) => {
   );
 };
 
-export default TicketPurchase;
+
+
+
+export default AcademicEventForm;

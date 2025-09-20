@@ -25,11 +25,9 @@ export interface EventData {
   ticketPurchaseUrl: string;
   category: string;
   categoryColor: string;
-  pricingTiers?: {
-    student: number;
-    professional: number;
-  };
-  
+  pricingTiers?: 
+    | { student: number; professional: number } // Para eventos académicos
+    | { general: number; vip?: number }; // Para eventos de recreación  
   services?: EventService[];
   pricingNotes?: string[];
 }

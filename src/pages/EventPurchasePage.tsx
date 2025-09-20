@@ -3,7 +3,11 @@ import { useParams, Link } from "react-router-dom";
 import { EventData } from "../types";
 import EventHeader from "../components/EventHeader";
 import EventDetails from "../components/EventDetails";
-import TicketPurchase from "../components/TicketPurchase";
+// --- PASO 1: CAMBIAR LA IMPORTACIÓN ---
+// Quitamos la importación directa al formulario académico...
+// import TicketPurchase from "../components/AcademicEventForm"; 
+// ...y en su lugar, importamos nuestro controlador inteligente.
+import PurchaseFormController from "../components/PurchaseFormController";
 import ArrowLeftIcon from "../components/icons/ArrowLeftIcon";
 
 interface EventPurchasePageProps {
@@ -56,7 +60,10 @@ const EventPurchasePage: React.FC<EventPurchasePageProps> = ({ events }) => {
             <EventDetails event={event} />
           </div>
           <div>
-            <TicketPurchase eventData={event} />
+            {/* --- PASO 2: USAR EL CONTROLADOR --- */}
+            {/* Reemplazamos <TicketPurchase... /> con nuestro nuevo componente. */}
+            {/* Ahora, este componente decidirá por sí mismo qué formulario mostrar. */}
+            <PurchaseFormController eventData={event} />
           </div>
         </div>
       </main>
