@@ -318,8 +318,8 @@ const FormFields: React.FC<{
               Bs.{" "}
               {service.type === "mandatory"
                 ? formData.academicDegree === "estudiante"
-                  ? eventData.pricingTiers?.student
-                  : eventData.pricingTiers?.professional
+                  ? eventData.pricingTiers!.student
+                  : eventData.pricingTiers!.professional
                 : service.price}
             </span>
           </label>
@@ -397,8 +397,8 @@ if (!eventData.pricingTiers || !('student' in eventData.pricingTiers) || !('prof
 
     const basePrice =
       formData.academicDegree === "estudiante"
-        ? eventData.pricingTiers.student
-        : eventData.pricingTiers.professional;
+        ? eventData.pricingTiers!.student
+        : eventData.pricingTiers!.professional;
 
     const additionalServicesCost =
       eventData.services?.reduce((total, service) => {
