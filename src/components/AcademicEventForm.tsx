@@ -14,6 +14,17 @@ import {
   EventService,
 } from "../types";
 
+// Función type guard para eventos académicos
+function isAcademicPricing(
+  pricingTiers: EventData['pricingTiers']
+): pricingTiers is { student: number; professional: number } {
+  return pricingTiers != null && 
+         'student' in pricingTiers && 
+         'professional' in pricingTiers &&
+         typeof pricingTiers.student === 'number' &&
+         typeof pricingTiers.professional === 'number';
+}
+
 const validResellerCodes = [
   "DAVO01",
   "DAVO02",
@@ -317,10 +328,14 @@ const FormFields: React.FC<{
             <span className="font-semibold text-light-black dark:text-dark-secondary">
               Bs.{" "}
               {service.type === "mandatory"
-                ? formData.academicDegree === "estudiante"
-                  ? eventData.pricingTiers!.student
-                  : eventData.pricingTiers!.professional
-                : service.price}
+              ? formData.academicDegree === "estudiante"
+                ? isAcademicPricing(eventData.pricingTiers) 
+                  ? eventData.pricingTiers.student 
+                  : 0
+                : isAcademicPricing(eventData.pricingTiers)
+                  ? eventData.pricingTiers.professional
+                  : 0
+              : service.price}  
             </span>
           </label>
         ))}
@@ -395,10 +410,14 @@ if (!eventData.pricingTiers || !('student' in eventData.pricingTiers) || !('prof
       return;
     }
 
-    const basePrice =
-      formData.academicDegree === "estudiante"
-        ? eventData.pricingTiers!.student
-        : eventData.pricingTiers!.professional;
+const basePrice =
+  formData.academicDegree === "estudiante"
+    ? isAcademicPricing(eventData.pricingTiers) 
+      ? eventData.pricingTiers.student 
+      : 0
+    : isAcademicPricing(eventData.pricingTiers)
+      ? eventData.pricingTiers.professional
+      : 0;
 
     const additionalServicesCost =
       eventData.services?.reduce((total, service) => {
